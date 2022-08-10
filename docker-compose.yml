@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  api-films:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: api-films
+    container_name: api-films
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    expose:
+      - "4000"
+    depends_on:
+      - mongo-films
+    environment:
+      MONGO_URI: mongodb://mongo-films:27017/films
+    volumes:
+      - ./src:/usr/src/app/src
+
+  mongo-films:
+    image: mongo
+    container_name: mongo-films
+    restart: unless-stopped
+    volumes:
+      - .db-cache:/data/db
+    ports:
+      - "27019:27017"
