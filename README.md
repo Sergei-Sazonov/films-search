@@ -1,4 +1,4 @@
-# Fimls search
+# Films search
 
 ## Install
 
